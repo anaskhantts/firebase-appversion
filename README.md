@@ -26,15 +26,24 @@ jobs:
         projectNumber: ${{secrets.FIREBASE_PROJECT_NUMBER}}
         serviceAccount: ${{secrets.FIREBASE_SERVICE_ACCOUNT}}
 
-    # For flutter use below to increment version:
-    - name: Update version in YAML
-      run: | 
-        sed -i 's/version: [0-9]*\.[0-9]*\.[0-9]*+[0-9]*/version: ${{ steps.version.outputs.newFlutterVersionString }}/' pubspec.yaml
-        
-     # On mac agent: sed -i '' 's/version: [0-9]*\.[0-9]*\.[0-9]*+[0-9]*/version: ${{ steps.version.outputs.newFlutterVersionString }}/' pubspec.yaml
+    - name: Extract build number
+      id: extract_build_number
+      run: |
+        version_string="${{ steps.version.outputs.newFlutterVersionString }}"
+        build_number=$(echo $version_string | cut -d '+' -f 2)
+        echo "Build number is $build_number"
+        echo "build_number=$build_number" >> $GITHUB_ENV
 
-     # Your Build and Distribution steps steps
-     # eg: wzieba/Firebase-Distribution-Github-Action@v1
+    - name: Build APK
+      run: flutter build apk --flavor dev --build-number=${{ env.build_number }}
+
+    - name: upload artifact to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{secrets.FIREBASE_APP_ID}}
+        serviceCredentialsFileContent: ${{secrets.FIREBASE_SERVICE_KEY}}
+        groups: devs
+        file: build/app/outputs/flutter-apk/app-dev-release.apk
 ```
 
 ## Inputs
