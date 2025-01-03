@@ -1,0 +1,26 @@
+{
+  "name": "firebase-increment-app-version",
+  "version": "1.0.0",
+  "description": "Github action to retrieves the latest app version from firebase and returns an incremented new version",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vizzn/firebase-appversion.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vizzn/firebase-appversion.git/issues"
+  },
+  "homepage": "https://github.com/Vizzn/firebase-appversion.git#readme",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "googleapis": "^144.0.0",
+    "request": "^2.88.2"
+  }
+}
