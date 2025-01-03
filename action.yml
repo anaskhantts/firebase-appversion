@@ -24,7 +24,7 @@ outputs:
   newFlutterVersionString: 
     description: 'The latest app version + build number (eg: 1.0.1+11)'
 branding:
-  color: 'yellow'
+  color: 'blue'
   icon: 'arrow-up'
 runs:
   using: 'node20'
