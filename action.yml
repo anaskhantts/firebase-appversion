@@ -1,4 +1,4 @@
-name: 'Firebase Increment App Version'
+name: 'Firebase AppVersion Increment'
 description: 'Github action to retrieves the latest app version from firebase and returns an incremented new version'
 inputs:
   appId:
